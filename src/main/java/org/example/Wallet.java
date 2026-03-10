@@ -4,32 +4,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Wallet {
-    private String owner;
+    private Owner owner;
     private List<Card> cards;
-    private List<Integer> moneys;
+    private double cash;
 
-    public Wallet(String owner) {
+    public Wallet(Owner owner) {
         this.owner = owner;
         this.cards = new ArrayList<>();
-        this.moneys = new ArrayList<>();
+        this.cash = 0.0;
     }
 
-    public void setOwner(String owner) {
+    public void setOwner(Owner owner) {
         this.owner = owner;
     }
 
-    public String getOwner() {
+    public Owner getOwner() {
         return owner;
     }
 
-    public void addCard(String bank, String nomor) {
+    public void addCards(String bank, int nomor) {
         Card newCard = new Card(bank, nomor);
         this.cards.add(newCard);
     }
 
-    public Card takeCard(String nomor) {
+    public Card removeCard(int nomor) {
         for (Card card : cards) {
-            if (card.getNomorRekening().equals(nomor)) {
+            if (card.getNomorRekening() == nomor) {
                 cards.remove(card);
                 return card;
             }
@@ -41,37 +41,31 @@ public class Wallet {
         return cards;
     }
 
-    public void addMoney(Integer lembaran) {
-        if (lembaran > 0) {
-            this.moneys.add(lembaran);
+    public void deposit(double amount) {
+        if (amount > 0) {
+            this.cash += amount;
         }
     }
 
-    public boolean takeMoney(Integer lembaran) {
-        if (this.moneys.contains(lembaran)) {
-            this.moneys.remove(lembaran);
-            return true;
+    public void withdraw(double amount) throws InsufficientFundsException {
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Withdraw amount must be > 0");
         }
-        return false;
-    }
-
-    public int calculateTotalBalance() {
-        int total = 0;
-        for (Integer uang : this.moneys) {
-            total += uang;
+        if (this.cash < amount) {
+            throw new InsufficientFundsException("Insufficient funds");
         }
-        return total;
+        this.cash -= amount;
     }
 
-    public List<Integer> getMoneys() {
-        return moneys;
+    public double getCash() {
+        return cash;
     }
 
-    public void cleanMoneys(){
-        moneys.clear();
+    public void cleanCash() {
+        this.cash = 0.0;
     }
 
-    public void cleanCards(){
+    public void cleanCards() {
         cards.clear();
     }
 }

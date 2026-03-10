@@ -2,9 +2,9 @@ package org.example;
 
 public class Card {
     private String namaBank;
-    private String nomorRekening;
+    private int nomorRekening;
 
-    public Card(String namaBank, String nomorRekening) {
+    public Card(String namaBank, int nomorRekening) {
         this.namaBank = namaBank;
         this.nomorRekening = nomorRekening;
     }
@@ -13,7 +13,7 @@ public class Card {
         return namaBank;
     }
 
-    public String getNomorRekening() {
+    public int getNomorRekening() {
         return nomorRekening;
     }
 }

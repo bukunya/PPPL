@@ -1,8 +1,13 @@
 package org.example;
 
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvFileSource;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.List;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -14,7 +19,8 @@ class WalletTest {
 
     @BeforeAll
     void initClass() {
-        dompet = new Wallet("Abdullah");
+        Owner defaultOwner = new Owner("1", "Abdullah", "abd@ugm.ac.id");
+        dompet = new Wallet(defaultOwner);
     }
 
     @AfterAll
@@ -24,114 +30,84 @@ class WalletTest {
 
     @BeforeEach
     void initMethod() {
-        dompet.addMoney(10000);
-        dompet.addCard("DefaultBank", "000-000");
+        dompet.deposit(10000.0);
+        dompet.addCards("DefaultBank", 0);
     }
 
     @AfterEach
     void cleanMethod() {
         dompet.cleanCards();
-        dompet.cleanMoneys();
+        dompet.cleanCash();
     }
 
     @Test
     @Order(1)
-    @DisplayName("Test Inisialisasi Wallet dan Owner")
+    @DisplayName("Execute constructor, verify fields")
     void testIsWallet() {
         assertNotNull(dompet, "Objek dompet tidak boleh null");
-        assertEquals("Abdullah", dompet.getOwner());
+        assertEquals("Abdullah", dompet.getOwner().getName());
     }
 
-    @Test
-    @Order(2)
-    @DisplayName("Test Setter Owner")
-    void testOwner() {
-        dompet.setOwner("Afif");
-        assertEquals("Afif", dompet.getOwner());
+    @ParameterizedTest
+    @ValueSource(doubles = {10000.0, 50000.0, 100000.0})
+    @DisplayName("Tugas 1: Test Nominal Cash Valid (Deposit)")
+    void testCashValid(double nominal) {
+        dompet.cleanCash();
+        dompet.deposit(nominal);
+        assertEquals(nominal, dompet.getCash());
     }
 
-    @Test
-    @DisplayName("Test Menambah dan Mengambil Kartu")
-    void testCardOperations() {
-        dompet.addCard("BCA", "111-222");
-        dompet.addCard("Mandiri", "333-444");
+    @ParameterizedTest
+    @ValueSource(doubles = {-1000.0, -5000.0, 0.0})
+    @DisplayName("Tugas 1: Test Nominal Cash Tidak Valid (Deposit diabaikan)")
+    void testCashInvalid(double nominal) {
+        dompet.cleanCash();
+        dompet.deposit(nominal);
+        assertEquals(0.0, dompet.getCash()); // Saldo tetap 0
+    }
 
-        assertEquals(3, dompet.getCards().size());
+    @ParameterizedTest
+    @CsvFileSource(resources = "/valid-withdraw.csv", numLinesToSkip = 1)
+    @DisplayName("Tugas 2: Test Withdraw Valid (CSV)")
+    void testValidWithdrawCSV(double deposit, double withdraw, double expectedTotal) throws InsufficientFundsException {
+        dompet.cleanCash();
+        dompet.deposit(deposit);
 
-        Card diambil = dompet.takeCard("111-222");
+        if (withdraw > 0) {
+            dompet.withdraw(withdraw);
+        }
 
-        assertAll("Verifikasi Kartu",
-                () -> assertNotNull(diambil),
-                () -> assertEquals("BCA", diambil.getNamaBank()),
-                () -> assertEquals("111-222", diambil.getNomorRekening())
+        assertEquals(expectedTotal, dompet.getCash());
+    }
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "/invalid-withdraw.csv", numLinesToSkip = 1)
+    @DisplayName("Tugas 2: Test Withdraw Invalid Exception (CSV)")
+    void testInvalidWithdrawCSV(double deposit, double withdraw, String exceptionType) {
+        dompet.cleanCash();
+        dompet.deposit(deposit);
+
+        if (exceptionType.equals("InsufficientFundsException")) {
+            assertThrows(InsufficientFundsException.class, () -> dompet.withdraw(withdraw));
+        } else if (exceptionType.equals("IllegalArgumentException")) {
+            assertThrows(IllegalArgumentException.class, () -> dompet.withdraw(withdraw));
+        }
+    }
+
+    static Stream<Arguments> provideOwnerObjects() {
+        return Stream.of(
+                Arguments.of(new Owner("1", "Agus", "agus@ugm.ac.id")),
+                Arguments.of(new Owner("2", "Siti", "siti@ugm.ac.id"))
         );
-
-        assertEquals(2, dompet.getCards().size());
     }
 
-    @Test
-    @DisplayName("Test Tambah Uang dan Hitung Total")
-    void testAddMoney() {
-        assertEquals(10000, dompet.calculateTotalBalance());
-
-        dompet.addMoney(5000);
-        dompet.addMoney(2000);
-
-        assertEquals(3, dompet.getMoneys().size());
-        assertIterableEquals(
-                List.of(10000, 5000, 2000),
-                dompet.getMoneys()
-        );
-
-        assertEquals(17000, dompet.calculateTotalBalance());
-    }
-
-    @Test
-    @DisplayName("Test Mengambil Uang (Withdraw)")
-    void testTakeMoney() {
-        dompet.addMoney(50000);
-        dompet.addMoney(20000);
-
-        boolean isSuccess = dompet.takeMoney(20000);
-
-        assertTrue(isSuccess, "Harusnya berhasil mengambil uang yang tersedia");
-        assertEquals(60000, dompet.calculateTotalBalance(),
-                "Sisa saldo harus 60.000");
-
-        boolean isFail = dompet.takeMoney(100000);
-
-        assertFalse(isFail, "Harusnya gagal mengambil uang yang tidak ada");
-        assertEquals(60000, dompet.calculateTotalBalance(),
-                "Saldo tidak boleh berubah jika gagal");
-    }
-
-    @Test
-    @DisplayName("Test Mengambil Kartu Yang Tidak Ada")
-    void testTakeCardNotFound() {
-        Card result = dompet.takeCard("999-999");
-
-        assertNull(result);
-
-        assertEquals(1, dompet.getCards().size());
-    }
-
-    @Test
-    @DisplayName("Test Tambah Uang Negatif")
-    void testAddNegativeMoney() {
-        dompet.addMoney(-5000);
-
-        assertEquals(1, dompet.getMoneys().size());
-        assertEquals(10000, dompet.calculateTotalBalance());
-    }
-
-    @Test
-    @DisplayName("Test Ambil Uang Saat Kosong")
-    void testTakeMoneyWhenEmpty() {
-        dompet.cleanMoneys();
-
-        boolean result = dompet.takeMoney(10000);
-
-        assertFalse(result);
-        assertEquals(0, dompet.calculateTotalBalance());
+    @ParameterizedTest
+    @MethodSource("provideOwnerObjects")
+    @DisplayName("Tugas 3: Test Set Owner Menggunakan Object")
+    void testSetOwnerObject(Owner ownerParam) {
+        dompet.setOwner(ownerParam);
+        assertNotNull(dompet.getOwner());
+        assertEquals(ownerParam.getName(), dompet.getOwner().getName());
+        assertEquals(ownerParam.getEmail(), dompet.getOwner().getEmail());
     }
 }
