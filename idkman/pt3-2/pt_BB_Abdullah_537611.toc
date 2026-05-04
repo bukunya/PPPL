@@ -1,0 +1,9 @@
+\contentsline {section}{\numberline {A}Tujuan Pembelajaran}{2}{section.1}%
+\contentsline {section}{\numberline {B}Dasar Teori}{2}{section.2}%
+\contentsline {section}{\numberline {C}Hasil dan Pembahasan}{3}{section.3}%
+\contentsline {subsection}{\numberline {C.1}Kode Baru}{3}{subsection.3.1}%
+\contentsline {subsection}{\numberline {C.2}Perubahan dan penambahan kode}{4}{subsection.3.2}%
+\contentsline {subsection}{\numberline {C.3}Gambar Hasil Run}{9}{subsection.3.3}%
+\contentsline {subsection}{\numberline {C.4}GitHub}{9}{subsection.3.4}%
+\contentsline {section}{\numberline {D}Kesimpulan}{9}{section.4}%
+\contentsline {section}{\numberline {E}Daftar Pustaka}{10}{section.5}%

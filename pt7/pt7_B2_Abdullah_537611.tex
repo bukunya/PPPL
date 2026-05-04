@@ -1,0 +1,257 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\usepackage{graphicx}
+\graphicspath{{Figures/}}
+\usepackage{mathptmx}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{parskip}
+\usepackage{enumitem}
+\usepackage{indentfirst}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{xurl}
+\usepackage{microtype}
+\usepackage{float}
+\setlength{\emergencystretch}{1em}
+\sloppy
+
+\lstset{
+    breaklines=true,
+    postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+}
+
+\setlength{\parindent}{1em}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\definecolor{dkblue}{rgb}{0,0,0.5}
+\definecolor{lightblue}{rgb}{0,0.5,0.8}
+\definecolor{darkred}{rgb}{0.6,0,0}
+\definecolor{backcolour}{rgb}{0.97,0.97,0.97}
+
+\lstdefinestyle{javastyle}{
+    language=Java,
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{dkgreen}\itshape,
+    keywordstyle=\color{dkblue}\bfseries,
+    stringstyle=\color{mauve},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=4,
+    frame=lines,
+    rulecolor=\color{gray},
+    moredelim=[s][\color{orange}]{@}{\ },
+}
+
+\lstdefinestyle{xmlstyle}{
+    language=XML,
+    backgroundcolor=\color{backcolour},
+    basicstyle=\ttfamily\footnotesize,
+    morekeywords={xmlns,version,type,scope,groupId,artifactId,dependencies,dependency,project,modelVersion,build,plugins,plugin,configuration,source,target},
+    keywordstyle=\color{darkred}\bfseries,
+    commentstyle=\color{dkgreen}\itshape,
+    stringstyle=\color{dkblue},
+    tagstyle=\color{darkred},
+    breaklines=true,
+    numbers=left,
+    numbersep=5pt,
+    tabsize=2,
+    frame=lines
+}
+
+\geometry{
+    top=3cm,
+    left=4cm,
+    right=3cm,
+    bottom=3cm
+}
+
+\renewcommand{\thesection}{\Alph{section}} 
+
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}
+  {\thesection.}
+  {1em}
+  {}
+
+\begin{document}
+
+\begin{titlepage}
+    \centering
+    \onehalfspacing
+
+    {\fontsize{14}{17}\selectfont \textbf{LAPORAN PRAKTIKUM}} \\[0.2cm]
+    {\fontsize{16}{19}\selectfont \textbf{PRAKTIKUM PENGUJIAN PERANGKAT LUNAK}} \\[0.5cm]
+    {\fontsize{14}{17}\selectfont \textbf{PERTEMUAN 7}} \\[0.2cm]
+    {\fontsize{14}{17}\selectfont \textbf{Selenium}}
+    
+    \vfill
+    \includegraphics[width=6cm]{Figures/UGM.png} 
+    \vfill
+    
+    {\large Disusun Oleh:} \\[0.5cm]
+    
+    \begin{tabular}{l c l} 
+        Nama & : & Abdullah Afif Habiburrohman \\
+        NIM  & : & 537611/SV/24441 \\
+        Kelas & : & BB / B2 \\
+        Dosen & : & Divi Galih Prasetyo Putri, S.Kom., M.Kom., Ph.D.
+    \end{tabular}
+    
+    \vfill
+    
+    {\fontsize{12}{14}\selectfont \textbf{
+        PROGRAM STUDI SARJANA TERAPAN \\ 
+        TEKNOLOGI REKAYASA PERANGKAT LUNAK \\
+        DEPARTEMEN TEKNIK ELEKTRO DAN INFORMATIKA \\
+        SEKOLAH VOKASI \\
+        UNIVERSITAS GADJAH MADA \\
+        YOGYAKARTA \\
+        2026
+    }}
+    
+\end{titlepage}
+
+\newpage
+
+\section{Hasil dan Pembahasan}
+
+Pada praktikum kali ini, mahasiswa akan menguji aplikasi web menggunakan Selenium WebDriver. Selenium WebDriver adalah sebuah alat yang digunakan untuk mengotomatisasi pengujian aplikasi web dengan cara mensimulasikan interaksi pengguna pada browser. Dalam praktikum ini, mahasiswa akan membuat skrip pengujian untuk menguji fungsionalitas web \url{saucedemo.com}. Tujuannya adalah untuk menguji dua user yang berbeda, yaitu "standard\_user" dan "locked\_out\_user", untuk memastikan bahwa aplikasi web berfungsi sesuai dengan yang diharapkan.
+
+\subsection{Persiapan}
+
+Mahasiswa membuat proyek Java pada Intellij IDEA, kemudian menambahkan dependensi Selenium pada file pom.xml. Selain itu, mahasiswa juga menambahkan dependensi JUnit untuk melakukan pengujian unit pada skrip yang dibuat. Berikut adalah konfigurasi pom.xml yang mahasiswa gunakan:
+
+\begin{lstlisting}[style=xmlstyle]
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    ...
+    <dependencies>
+        <!-- Source: https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>4.39.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <!-- Source: https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.13.4</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+</project>
+\end{lstlisting}
+
+Link-link yang digunakan untuk dependensi dapat dilihat pada komentar dalam kode, semuanya dari maven repository.
+
+Kemudian, buat kelas pengujian pada src/test/java/org/example dengan nama MainTest. Mahasiswa mengimpor dependensi yang diperlukan dan menyiapkan @AfterEach untuk menutup browser setelah setiap pengujian. Berikut adalah struktur awal kelas MainTest:
+
+\begin{lstlisting}[style=javastyle]
+package org.example;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+public class MainTest {
+    WebDriver driver;
+
+    ... Kode pengujian akan ditempatkan di sini ...
+
+    @AfterEach
+    void quit() {
+        if (driver != null) driver.quit();
+    }
+}
+\end{lstlisting}
+
+\subsection{Implementasi method validTest}
+
+Method validTest digunakan untuk menguji login dengan user "standard\_user". Dalam method ini, mahasiswa membuka browser, mengakses situs \url{saucedemo.com}, memasukkan username dan password yang benar, kemudian menekan tombol login. Setelah itu, mahasiswa memverifikasi bahwa login berhasil dengan memeriksa apakah elemen tertentu yang hanya muncul setelah login berhasil dapat ditemukan. Berikut adalah implementasi method validTest:
+
+\begin{lstlisting}[style=javastyle]
+@Test
+    void validTest(){
+        driver = new FirefoxDriver();
+        driver.get("https://www.saucedemo.com/");
+        WebElement userName = driver.findElement(By.id("user-name"));
+        userName.sendKeys("standard_user");
+        WebElement password = driver.findElement(By.id("password"));
+        password.sendKeys("secret_sauce");
+        WebElement submit = driver.findElement(By.id("login-button"));
+        submit.submit();
+
+        String expectedUrl = "https://www.saucedemo.com/inventory.html";
+        Assertions.assertEquals(expectedUrl, driver.getCurrentUrl(), "URL should match inventory page");
+
+        WebElement header = driver.findElement(By.className("title"));
+        Assertions.assertEquals("Products", header.getText());
+
+        boolean isCartVisible = driver.findElement(By.className("shopping_cart_link")).isDisplayed();
+        Assertions.assertTrue(isCartVisible);
+    }
+\end{lstlisting}
+
+variabel driver digunakan untuk mengontrol browser, dan method get digunakan untuk membuka situs web. Kemudian, mahasiswa menggunakan findElement untuk menemukan elemen input username dan password, mengisi keduanya dengan sendKeys, dan menekan tombol login dengan submit. Setelah itu, mahasiswa memverifikasi bahwa URL saat ini adalah URL yang diharapkan setelah login berhasil, memeriksa apakah header "Products" muncul, dan memastikan bahwa ikon keranjang belanja terlihat.
+
+\subsection{Implementasi method lockedOutUser}
+
+Method lockedOutUser digunakan untuk menguji login dengan user "locked\_out\_user". Dalam method ini, mahasiswa melakukan langkah yang sama seperti pada validTest, tetapi dengan username yang berbeda. Setelah mencoba login, mahasiswa memverifikasi bahwa login gagal dengan memeriksa apakah pesan error yang sesuai muncul. Berikut adalah implementasi method lockedOutUser:
+
+\begin{lstlisting}[style=javastyle]
+    @Test
+    void lockedOutuser(){
+        driver = new FirefoxDriver();
+        driver.get("https://www.saucedemo.com/");
+        WebElement userName = driver.findElement(By.id("user-name"));
+        userName.sendKeys("locked_out_user");
+        WebElement password = driver.findElement(By.id("password"));
+        password.sendKeys("secret_sauce");
+        WebElement submit = driver.findElement(By.id("login-button"));
+        submit.submit();
+
+        WebElement errorElement = driver.findElement(By.cssSelector("[data-test='error']"));
+        String errorMessage = errorElement.getText();
+
+        Assertions.assertTrue(errorMessage.contains("Sorry, this user has been locked out"));
+    }
+\end{lstlisting}
+
+variabel driver, method get, findElement, sendKeys, dan submit digunakan dengan cara yang sama seperti pada validTest. Setelah mencoba login, mahasiswa mencari elemen yang menampilkan pesan error menggunakan findElement dengan selector CSS. Kemudian, mahasiswa memeriksa apakah pesan error yang ditampilkan mengandung teks "Sorry, this user has been locked out" untuk memastikan bahwa login gagal sesuai dengan yang diharapkan.
+
+\section{Gambar}
+
+Berikut adalah gambar hasil running pengujian validTest dan lockedOutUser:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{image.png}
+    \caption{Hasil Running validTest}
+\end{figure}
+
+\end{document}

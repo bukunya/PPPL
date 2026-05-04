@@ -1,0 +1,364 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\usepackage{graphicx}
+\graphicspath{{Figures/}}
+\usepackage{mathptmx}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{parskip}
+\usepackage{enumitem}
+\usepackage{indentfirst}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{xurl}
+% allow LaTeX to relax spacing and improve justification
+\usepackage{microtype}
+\setlength{\emergencystretch}{1em}
+\sloppy
+
+\lstset{
+    breaklines=true,
+    postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+}
+
+\setlength{\parindent}{1em}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\definecolor{dkblue}{rgb}{0,0,0.5}
+\definecolor{lightblue}{rgb}{0,0.5,0.8}
+\definecolor{darkred}{rgb}{0.6,0,0}
+\definecolor{backcolour}{rgb}{0.97,0.97,0.97}
+
+\lstdefinestyle{javastyle}{
+    language=Java,
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{dkgreen}\itshape,
+    keywordstyle=\color{dkblue}\bfseries,
+    stringstyle=\color{mauve},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=4,
+    frame=lines,
+    rulecolor=\color{gray},
+    moredelim=[s][\color{orange}]{@}{\ },
+}
+
+\lstdefinestyle{xmlstyle}{
+    language=XML,
+    backgroundcolor=\color{backcolour},
+    basicstyle=\ttfamily\footnotesize,
+    morekeywords={xmlns,version,type,scope,groupId,artifactId,dependencies,dependency,project,modelVersion,build,plugins,plugin,configuration,source,target},
+    keywordstyle=\color{darkred}\bfseries,
+    commentstyle=\color{dkgreen}\itshape,
+    stringstyle=\color{dkblue},
+    tagstyle=\color{darkred},
+    breaklines=true,
+    numbers=left,
+    numbersep=5pt,
+    tabsize=2,
+    frame=lines
+}
+
+\geometry{
+    top=3cm,
+    left=4cm,
+    right=3cm,
+    bottom=3cm
+}
+
+\renewcommand{\thesection}{\Alph{section}} 
+
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}
+  {\thesection.}
+  {1em}
+  {}
+
+\begin{document}
+
+\begin{titlepage}
+    \centering
+    \onehalfspacing
+
+    {\fontsize{14}{17}\selectfont \textbf{LAPORAN PRAKTIKUM}} \\[0.2cm]
+    {\fontsize{16}{19}\selectfont \textbf{PRAKTIKUM PENGUJIAN PERANGKAT LUNAK}} \\[0.5cm]
+    {\fontsize{14}{17}\selectfont \textbf{PERTEMUAN 2}} \\[0.2cm]
+    {\fontsize{14}{17}\selectfont \textbf{Unit Testing Life Cycle}}
+    
+    \vfill
+    \includegraphics[width=6cm]{Figures/UGM.png} 
+    \vfill
+    
+    {\large Disusun Oleh:} \\[0.5cm]
+    
+    \begin{tabular}{l c l} 
+        Nama & : & Abdullah Afif Habiburrohman \\
+        NIM  & : & 537611/SV/24441 \\
+        Kelas & : & BB / B2 \\
+        Dosen & : & Divi Galih Prasetyo Putri, S.Kom., M.Kom., Ph.D.
+    \end{tabular}
+    
+    \vfill
+    
+    {\fontsize{12}{14}\selectfont \textbf{
+        PROGRAM STUDI SARJANA TERAPAN \\ 
+        TEKNOLOGI REKAYASA PERANGKAT LUNAK \\
+        DEPARTEMEN TEKNIK ELEKTRO DAN INFORMATIKA \\
+        SEKOLAH VOKASI \\
+        UNIVERSITAS GADJAH MADA \\
+        YOGYAKARTA \\
+        2026
+    }}
+    
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+\section{Tujuan Pembelajaran}
+\begin{enumerate}
+    \item Mahasiswa memahami life cycle dan anotasi yang ada pada JUnit
+    \item Mahasiswa mampu mengimplementasikan anotasi pada pengujian unit
+\end{enumerate}
+
+\section{Dasar Teori}
+Dalam kerangka kerja pengujian Java (khususnya JUnit versi 5 ke atas), siklus hidup pengujian (test lifecycle) dikelola melalui serangkaian anotasi khusus. Siklus hidup ini bertujuan untuk mengatur tiga fase utama dalam setiap skenario pengujian, yaitu: fase persiapan (setup), fase eksekusi pengujian, dan fase pembersihan (cleanup). Pengelolaan siklus hidup ini sangat penting untuk menyiapkan lingkungan pengujian (test environment) yang konsisten, memastikan keandalan tes, serta mencegah terjadinya kebocoran sumber daya (resource leaks).
+
+Lima anotasi fundamental yang menyusun test lifecycle pada JUnit adalah:
+\begin{enumerate}
+    \item @BeforeAll: Menandai metode yang akan dieksekusi satu kali sebelum seluruh metode tes di dalam sebuah kelas pengujian dijalankan. Biasanya digunakan untuk inisialisasi pada tingkat kelas, seperti membuka koneksi database atau menyiapkan sumber daya yang digunakan bersama (shared resources).
+    
+    \item @BeforeEach: Menandai metode yang akan dieksekusi sesaat sebelum setiap metode tes berjalan. Fase ini ideal untuk menyiapkan data mock, mereset variabel, atau menginisialisasi objek agar setiap metode tes mendapatkan lingkungan yang bersih dan independen.
+    
+    \item @Test: Menandai metode utama yang berisi logika pengujian dan asersi (assertions) untuk memvalidasi apakah kode yang diuji berjalan sesuai dengan ekspektasi.
+    
+    \item @AfterEach: Menandai metode yang dieksekusi setelah setiap metode tes selesai dijalankan. Berguna untuk membersihkan data spesifik atau mereset konfigurasi pasca-pengujian.
+    
+    \item @AfterAll: Menandai metode yang dieksekusi satu kali setelah seluruh metode tes dalam sebuah kelas selesai. Fungsi utamanya adalah untuk melepaskan sumber daya memori atau menutup koneksi tingkat kelas.
+\end{enumerate}
+
+Secara bawaan (default), JUnit menggunakan strategi siklus hidup PER\_METHOD, di mana JUnit akan membuat instance objek kelas pengujian baru untuk setiap metode @Test. Meskipun hal ini menjamin isolasi total antar tes, pendekatan ini mengharuskan metode @BeforeAll dan @AfterAll bersifat static.
+
+Untuk mengatasi batasan tersebut atau untuk mendukung pengujian yang memerlukan pembagian status (shared state), JUnit menyediakan anotasi @TestInstance(TestInstance.Lifecycle.PER\_CLASS). Saat anotasi ini diterapkan pada tingkat kelas, JUnit hanya akan membuat satu instance kelas pengujian yang digunakan oleh seluruh metode tes di dalamnya. Pendekatan ini memungkinkan metode inisialisasi tingkat kelas berjalan tanpa keyword static dan lebih efisien dalam manajemen memori untuk kelas uji yang berat secara komputasi.
+
+Menurut prinsip standar unit testing, setiap metode tes idealnya bersifat independen dan tidak bergantung pada urutan eksekusi. Oleh karena itu, secara default, JUnit mengeksekusi tes menggunakan algoritma deterministik yang disengaja agar urutannya tidak tertebak (nonobvious).
+
+Namun, untuk skenario tertentu seperti integration test atau pengujian fungsional yang mempertahankan status (stateful testing—terutama saat menggunakan PER\_CLASS), urutan eksekusi menjadi sangat krusial. JUnit menyediakan mekanisme untuk mengontrol urutan eksekusi ini melalui:
+\begin{enumerate}
+    \item @TestMethodOrder: Anotasi pada tingkat kelas untuk menentukan strategi pengurutan metode. Salah satu strategi bawaan adalah MethodOrderer.OrderAnnotation.class, yang memerintahkan JUnit untuk mengeksekusi tes berdasarkan nilai numerik yang didefinisikan secara eksplisit.
+
+    \item @Order(n): Anotasi pada tingkat metode yang bekerja berpasangan dengan strategi OrderAnnotation. Metode akan dieksekusi secara berurutan mulai dari nilai numerik terkecil.
+
+    \item @TestClassOrder: Digunakan untuk mengurutkan eksekusi antar kelas pengujian, khususnya pada nested test classes (kelas bersarang), menggunakan strategi seperti ClassOrderer.OrderAnnotation.class.
+\end{enumerate}
+
+\section{Hasil dan Pembahasan}
+Mahasiswa melanjutkan praktikum sebelumnya, Wallet dan testing, dengan menambahkan Testing Lifecycle pada kelas WalletTest. Mahasiswa akan menampilkan kode tambahan/perubahan yang dilakukan pada kelas WalletTest untuk mengimplementasikan Testing Lifecycle. Berikut adalah kode lengkap dari kelas WalletTest yang telah diimplementasikan dengan Testing Lifecycle:
+
+\subsection{Kode}
+\begin{lstlisting}[style=javastyle]
+package org.example;
+
+import org.junit.jupiter.api.*;
+
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+\end{lstlisting}
+
+Kode di atas adalah kode yang digunakan untuk mengimpor kelas-kelas yang diperlukan untuk melakukan pengujian pada kelas Wallet.
+
+\begin{lstlisting}[style=javastyle]
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+\end{lstlisting}
+
+Kode di atas adalah kode yang digunakan untuk mengatur lifecycle dari kelas pengujian dan urutan eksekusi metode pengujian. @TestInstance(TestInstance.Lifecycle.PER\_CLASS) digunakan untuk mengatur lifecycle dari kelas pengujian menjadi PER\_CLASS, yang berarti objek pengujian akan dibuat sekali untuk seluruh metode pengujian dalam kelas. Hal ini membuat @BeforeAll dan @AfterAll dapat digunakan pada metode non-static.
+
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class) digunakan untuk mengatur urutan eksekusi metode pengujian berdasarkan anotasi @Order. Selain OrderAnnotation, terdapat beberapa strategi lain untuk mengatur urutan eksekusi metode pengujian, seperti Alphanumeric, Random, dan MethodName. Alphanumeric akan mengurutkan metode pengujian berdasarkan nama metode secara alfabetis, Random akan mengacak urutan eksekusi metode pengujian setiap kali dijalankan, dan MethodName akan mengurutkan metode pengujian berdasarkan nama metode secara berurutan. Dengan menggunakan @TestMethodOrder(MethodOrderer.OrderAnnotation.class), kita dapat menentukan urutan eksekusi metode pengujian secara eksplisit dengan memberikan anotasi @Order pada setiap metode pengujian.
+
+\begin{lstlisting}[style=javastyle]
+class WalletTest {
+
+    Wallet dompet;
+
+    @BeforeAll
+    void initClass() {
+        dompet = new Wallet("Abdullah");
+    }
+
+    @AfterAll
+    void cleanClass() {
+        dompet = null;
+    }
+
+    @BeforeEach
+    void initMethod() {
+        dompet.addMoney(10000);
+        dompet.addCard("DefaultBank", "000-000");
+    }
+
+    @AfterEach
+    void cleanMethod() {
+        dompet.cleanCards();
+        dompet.cleanMoneys();
+    }
+\end{lstlisting}
+
+Kode di atas adalah kode yang digunakan untuk mengatur lifecycle dari metode pengujian. @BeforeAll digunakan untuk menandai metode yang akan dijalankan sekali sebelum semua metode pengujian dalam kelas dijalankan. Dalam contoh ini, metode initClass() digunakan untuk menginisialisasi objek dompet sebelum semua metode pengujian dijalankan. @AfterAll digunakan untuk menandai metode yang akan dijalankan sekali setelah semua metode pengujian dalam kelas dijalankan. Dalam contoh ini, metode cleanClass() digunakan untuk membersihkan objek dompet setelah semua metode pengujian dijalankan. 
+
+@BeforeEach digunakan untuk menandai metode yang akan dijalankan sebelum setiap metode pengujian dijalankan. Dalam contoh ini, metode initMethod() digunakan untuk menambahkan uang dan kartu default ke dalam dompet sebelum setiap metode pengujian dijalankan. @AfterEach digunakan untuk menandai metode yang akan dijalankan setelah setiap metode pengujian dijalankan. Dalam contoh ini, metode cleanMethod() digunakan untuk membersihkan kartu dan uang dari dompet setelah setiap metode pengujian dijalankan. Dengan menggunakan anotasi-anotasi ini, kita dapat memastikan bahwa setiap metode pengujian dijalankan dalam kondisi yang konsisten dan terisolasi, sehingga hasil pengujian menjadi lebih akurat dan dapat dipercaya.
+
+\begin{lstlisting}[style=javastyle]
+    @Test
+    @Order(1)
+    @DisplayName("Test Inisialisasi Wallet dan Owner")
+    void testIsWallet() {
+        assertNotNull(dompet, "Objek dompet tidak boleh null");
+        assertEquals("Abdullah", dompet.getOwner());
+    }
+
+    @Test
+    @Order(2)
+    @DisplayName("Test Setter Owner")
+    void testOwner() {
+        dompet.setOwner("Afif");
+        assertEquals("Afif", dompet.getOwner());
+    }
+\end{lstlisting}
+
+Pada kode di atas, terdapat dua metode pengujian yang menggunakan anotasi @Test, @Order, dan @DisplayName. Metode pertama, testIsWallet(), digunakan untuk menguji apakah objek dompet telah diinisialisasi dengan benar dan apakah pemilik dompet sesuai dengan yang diharapkan. Metode kedua, testOwner(), digunakan untuk menguji apakah metode setter dan getter untuk properti owner bekerja dengan benar. Dengan menggunakan anotasi @Order, kita dapat mengatur urutan eksekusi metode pengujian. Dalam contoh ini, metode testIsWallet() akan dijalankan sebelum metode testOwner(). Dengan menggunakan anotasi @DisplayName, kita dapat memberikan nama yang lebih deskriptif dan mudah dipahami untuk setiap metode pengujian. Hal ini dapat membantu dalam memahami tujuan dari setiap metode pengujian dan mempermudah proses debugging jika terjadi kegagalan pengujian.
+
+\begin{lstlisting}[style=javastyle]
+    @Test
+    @DisplayName("Test Menambah dan Mengambil Kartu")
+    void testCardOperations() {
+        dompet.addCard("BCA", "111-222");
+        dompet.addCard("Mandiri", "333-444");
+
+        assertEquals(3, dompet.getCards().size());
+
+        Card diambil = dompet.takeCard("111-222");
+
+        assertAll("Verifikasi Kartu",
+                () -> assertNotNull(diambil),
+                () -> assertEquals("BCA", diambil.getNamaBank()),
+                () -> assertEquals("111-222", diambil.getNomorRekening())
+        );
+
+        assertEquals(2, dompet.getCards().size());
+    }
+
+    @Test
+    @DisplayName("Test Tambah Uang dan Hitung Total")
+    void testAddMoney() {
+        assertEquals(10000, dompet.calculateTotalBalance());
+
+        dompet.addMoney(5000);
+        dompet.addMoney(2000);
+
+        assertEquals(3, dompet.getMoneys().size());
+        assertIterableEquals(
+                List.of(10000, 5000, 2000),
+                dompet.getMoneys()
+        );
+
+        assertEquals(17000, dompet.calculateTotalBalance());
+    }
+
+    @Test
+    @DisplayName("Test Mengambil Uang (Withdraw)")
+    void testTakeMoney() {
+        dompet.addMoney(50000);
+        dompet.addMoney(20000);
+
+        boolean isSuccess = dompet.takeMoney(20000);
+
+        assertTrue(isSuccess, "Harusnya berhasil mengambil uang yang tersedia");
+        assertEquals(60000, dompet.calculateTotalBalance(),
+                "Sisa saldo harus 60.000");
+
+        boolean isFail = dompet.takeMoney(100000);
+
+        assertFalse(isFail, "Harusnya gagal mengambil uang yang tidak ada");
+        assertEquals(60000, dompet.calculateTotalBalance(),
+                "Saldo tidak boleh berubah jika gagal");
+    }
+
+    @Test
+    @DisplayName("Test Mengambil Kartu Yang Tidak Ada")
+    void testTakeCardNotFound() {
+        Card result = dompet.takeCard("999-999");
+
+        assertNull(result);
+
+        assertEquals(1, dompet.getCards().size());
+    }
+
+    @Test
+    @DisplayName("Test Tambah Uang Negatif")
+    void testAddNegativeMoney() {
+        dompet.addMoney(-5000);
+
+        assertEquals(1, dompet.getMoneys().size());
+        assertEquals(10000, dompet.calculateTotalBalance());
+    }
+
+    @Test
+    @DisplayName("Test Ambil Uang Saat Kosong")
+    void testTakeMoneyWhenEmpty() {
+        dompet.cleanMoneys();
+
+        boolean result = dompet.takeMoney(10000);
+
+        assertFalse(result);
+        assertEquals(0, dompet.calculateTotalBalance());
+    }
+}
+\end{lstlisting}
+
+    Kode di atas adalah kode pengembangan dari praktikum sebelumnya. Pengembangan yang dilakukan difokuskan untuk penyesuaian dan pengimplementasian dari Testing Lifecycle. Misal pada modul testCardOperations(), diubah nilai assertEquals(2, dompet.getCards().size()) menjadi assertEquals(3, dompet.getCards().size()) karena pada metode initMethod() sudah ditambahkan 1 kartu default sebelum setiap metode pengujian dijalankan. Untuk modul-modul lain juga sama terdapat penyesuaian.
+
+
+\subsection{Gambar}
+Berikut adalah hasil run dari kelas WalletTest yang telah diimplementasikan dengan Testing Lifecycle:
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{one.png}
+    \caption{Hasil Run Kelas WalletTest dengan Testing Lifecycle}
+    \label{fig:wallettest}
+\end{figure}
+
+\subsection{GitHub}
+Berikut adalah link repository di GitHub yang berisi kode diatas \url{https://github.com/bukunya/PPPL/tree/Pertemuan2}
+
+\section{Kesimpulan}
+Dalam praktikum ini mahasiswa telah mempelajari siklus hidup pengujian di JUnit 5 dan penerapan
+anotasi seperti @BeforeAll, @BeforeEach, @AfterEach, dan @AfterAll. Dengan mengatur
+`TestInstance` menjadi PER\_CLASS dan menggunakan `@TestMethodOrder`, pengujian menjadi lebih
+terstruktur dan memungkinkan penggunaan status bersama. Penambahan  metode inisialisasi dan
+pembersihan memastikan setiap test berjalan dalam kondisi yang konsisten.
+
+\section{Daftar Pustaka}
+\begin{enumerate}[label={[\arabic*]}]
+    \item JUnit 5 Test Lifecycle. \url{https://www.geeksforgeeks.org/software-testing/junit-5-test-lifecycle/}
+    \item TestInstance Annotation di JUnit. \url{https://www.baeldung.com/junit-testinstance-annotation}
+    \item JUnit 5 User Guide. \url{https://docs.junit.org/5.10.2/user-guide/index.html}
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,353 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\usepackage{graphicx}
+\graphicspath{{Figures/}}
+\usepackage{mathptmx}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{parskip}
+\usepackage{enumitem}
+\usepackage{indentfirst}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{xurl}
+\usepackage{microtype}
+\usepackage{float}
+\setlength{\emergencystretch}{1em}
+\sloppy
+
+\lstset{
+    breaklines=true,
+    postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+}
+
+\setlength{\parindent}{1em}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\definecolor{dkblue}{rgb}{0,0,0.5}
+\definecolor{lightblue}{rgb}{0,0.5,0.8}
+\definecolor{darkred}{rgb}{0.6,0,0}
+\definecolor{backcolour}{rgb}{0.97,0.97,0.97}
+
+\lstdefinestyle{javastyle}{
+    language=Java,
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{dkgreen}\itshape,
+    keywordstyle=\color{dkblue}\bfseries,
+    stringstyle=\color{mauve},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=4,
+    frame=lines,
+    rulecolor=\color{gray},
+    moredelim=[s][\color{orange}]{@}{\ },
+}
+
+\lstdefinestyle{xmlstyle}{
+    language=XML,
+    backgroundcolor=\color{backcolour},
+    basicstyle=\ttfamily\footnotesize,
+    morekeywords={xmlns,version,type,scope,groupId,artifactId,dependencies,dependency,project,modelVersion,build,plugins,plugin,configuration,source,target},
+    keywordstyle=\color{darkred}\bfseries,
+    commentstyle=\color{dkgreen}\itshape,
+    stringstyle=\color{dkblue},
+    tagstyle=\color{darkred},
+    breaklines=true,
+    numbers=left,
+    numbersep=5pt,
+    tabsize=2,
+    frame=lines
+}
+
+\geometry{
+    top=3cm,
+    left=4cm,
+    right=3cm,
+    bottom=3cm
+}
+
+\renewcommand{\thesection}{\Alph{section}} 
+
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}
+  {\thesection.}
+  {1em}
+  {}
+
+\begin{document}
+
+\begin{titlepage}
+    \centering
+    \onehalfspacing
+
+    {\fontsize{14}{17}\selectfont \textbf{LAPORAN PRAKTIKUM}} \\[0.2cm]
+    {\fontsize{16}{19}\selectfont \textbf{PRAKTIKUM PENGUJIAN PERANGKAT LUNAK}} \\[0.5cm]
+    {\fontsize{14}{17}\selectfont \textbf{PERTEMUAN 4}} \\[0.2cm]
+    {\fontsize{14}{17}\selectfont \textbf{Mocking Object Using Mockito}}
+    
+    \vfill
+    \includegraphics[width=6cm]{Figures/UGM.png} 
+    \vfill
+    
+    {\large Disusun Oleh:} \\[0.5cm]
+    
+    \begin{tabular}{l c l} 
+        Nama & : & Abdullah Afif Habiburrohman \\
+        NIM  & : & 537611/SV/24441 \\
+        Kelas & : & BB / B2 \\
+        Dosen & : & Divi Galih Prasetyo Putri, S.Kom., M.Kom., Ph.D.
+    \end{tabular}
+    
+    \vfill
+    
+    {\fontsize{12}{14}\selectfont \textbf{
+        PROGRAM STUDI SARJANA TERAPAN \\ 
+        TEKNOLOGI REKAYASA PERANGKAT LUNAK \\
+        DEPARTEMEN TEKNIK ELEKTRO DAN INFORMATIKA \\
+        SEKOLAH VOKASI \\
+        UNIVERSITAS GADJAH MADA \\
+        YOGYAKARTA \\
+        2026
+    }}
+    
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+\section{Tujuan Pembelajaran}
+\begin{enumerate}
+    \item Mahasiswa mampu memahami cara kerja mocking object menggunakan Mockito
+    \item Mahasiswa mampu megnimplementasikan mocking object menggunakan Mockito 
+\end{enumerate}
+
+\section{Dasar Teori}
+Mockito adalah sebuah framework mocking open-source yang sangat populer dan banyak digunakan untuk aplikasi berbasis Java. Framework ini memungkinkan pengembang perangkat lunak untuk membuat objek mock, yaitu objek tiruan yang meniru perilaku dari objek aslinya secara terkontrol. Dengan mengganti dependensi asli menggunakan mock, Mockito memungkinkan pengujian kode secara terisolasi tanpa perlu mengeksekusi metode aslinya secara langsung. Hal ini sangat membantu dalam menulis pengujian unit (unit test) yang bersih, mudah dipelihara, dan dapat diandalkan. Instalasi framework ini ke dalam proyek dapat dilakukan dengan menambahkan dependensi mockito-core melalui perangkat manajemen proyek seperti Apache Maven.
+
+Terdapat beberapa konsep inti dalam penggunaan Mockito pada pengujian perangkat lunak:
+\begin{enumerate}
+    \item Mock Objects (Objek Tiruan): Mock objects adalah implementasi palsu dari objek nyata yang menyimulasikan perilakunya untuk tujuan pengujian. Objek ini memungkinkan suatu kelas diuji secara terisolasi dengan mengganti dependensinya menjadi versi yang sepenuhnya dapat dikontrol dan diprediksi.
+    \item Stubbing: Stubbing adalah proses mendefinisikan apa yang harus dikembalikan oleh objek mock ketika sebuah metode spesifik dipanggil. Proses ini digunakan untuk menyimulasikan berbagai skenario, seperti mengembalikan nilai tetap, melempar eksepsi (exception), atau meniru respons sistem yang lambat. Implementasinya sering menggunakan sintaks when(...).thenReturn(...).
+    \item Verification (Verifikasi): Verifikasi adalah proses untuk memeriksa apakah metode-metode tertentu benar-benar dipanggil pada objek mock selama eksekusi pengujian. Langkah ini memastikan bahwa kode yang diuji berinteraksi dengan dependensinya persis seperti yang diharapkan, contohnya memastikan sebuah metode dipanggil dengan argumen spesifik dalam jumlah waktu tertentu menggunakan fungsi verify(...).
+\end{enumerate}
+
+\section{Hasil dan Pembahasan}
+Mahasiswa membuat proyek baru dengan isi kode tentang peminjaman buku dan mengimplementasikan mocking object. Framework yang digunakan untuk mocking adalah Mockito. Berikut adalah kode-kode yang telah diimplementasikan untuk memenuhi tugas praktikum ini:
+
+\subsection{Book.java}
+\begin{lstlisting}[style=javastyle, caption={Book.java}]
+package org.example;
+
+public class Book {
+    private String id;
+    private String title;
+
+    public Book(String id, String title) {
+        this.id = id;
+        this.title = title;
+    }
+
+    public String getId() { return id; }
+    public String getTitle() { return title; }
+}
+\end{lstlisting}
+
+Kode diatas merupakan kelas Book yang memiliki dua atribut yaitu id dan title. Kelas ini juga memiliki konstruktor untuk menginisialisasi atribut-atribut tersebut serta getter untuk masing-masing atribut.
+
+\subsection{LibraryModel.java}\label{one}
+\begin{lstlisting}[style=javastyle, caption={LibraryModel.java}]
+package org.example;
+
+import java.util.List;
+
+public interface LibraryModel {
+    boolean isBookAvailable(String id);
+
+    void peminjaman(String title, String username);
+
+    List<Book> getAllBooks();
+}
+\end{lstlisting}
+
+Kode diatas merupakan interface LibraryModel yang memiliki tiga method yaitu isBookAvailable untuk mengecek ketersediaan buku berdasarkan id, peminjaman untuk melakukan peminjaman buku berdasarkan judul dan username, serta getAllBooks untuk mendapatkan daftar semua buku yang tersedia.
+
+\subsection{NotificationService.java}\label{five}
+\begin{lstlisting}[style=javastyle, caption={NotificationService.java}]
+package org.example;
+
+public interface NotificationService {
+    void sendNotification(String username, String title);
+}
+\end{lstlisting}
+Kode diatas merupakan interface NotificationService yang memiliki satu method yaitu sendNotification untuk mengirimkan notifikasi kepada pengguna berdasarkan username dan judul buku yang dipinjam.
+
+\subsection{LibraryControl}
+\begin{lstlisting}[style=javastyle, caption={LibraryControl.java}]
+package org.example;
+
+public class LibraryControl {
+    private LibraryModel bookModel;
+    private NotificationService notificationService;
+
+    public LibraryControl(LibraryModel bookModel, NotificationService notificationService) {
+        this.bookModel = bookModel;
+        this.notificationService = notificationService;
+    }
+
+    public boolean checkAvailability(String id) {
+        return bookModel.isBookAvailable(id);
+    }
+
+    public void borrowBook(String id, String title, String username) {
+        bookModel.getAllBooks();
+
+        if (bookModel.isBookAvailable(id)) {
+            bookModel.peminjaman(title, username);
+            notificationService.sendNotification(username, title);
+        }
+    }
+}
+\end{lstlisting}
+
+Kode diatas merupakan kelas LibraryControl yang memiliki dua atribut yaitu bookModel dan notificationService. Kelas ini juga memiliki konstruktor untuk menginisialisasi atribut-atribut tersebut. Kelas ini memiliki dua method yaitu checkAvailability untuk mengecek ketersediaan buku berdasarkan id dan borrowBook untuk melakukan peminjaman buku berdasarkan id, judul, dan username. Pada method borrowBook, pertama-tama akan memanggil method getAllBooks untuk mendapatkan daftar semua buku yang tersedia. Kemudian akan mengecek ketersediaan buku menggunakan method isBookAvailable. Jika buku tersedia, maka akan melakukan peminjaman menggunakan method peminjaman dan mengirimkan notifikasi menggunakan method sendNotification.
+
+\subsection{LibraryControlTest.java}
+\begin{lstlisting}[style=javastyle, caption={LibraryControlTest.java}]
+package org.example;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.mockito.InOrder;
+import org.mockito.Mockito;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.*;
+
+class LibraryControlTest {
+
+    private LibraryModel bookModel;
+    private NotificationService notificationService;
+    private LibraryControl control;
+
+    @BeforeEach
+    void setUp() {
+        bookModel = Mockito.mock(LibraryModel.class);
+        notificationService = Mockito.mock(NotificationService.class);
+        control = new LibraryControl(bookModel, notificationService);
+    }
+
+    @Test
+    @DisplayName("Cek ketersediaan buku mengembalikan nilai dari model")
+    void testCheckAvailability() {
+        when(bookModel.isBookAvailable("B001")).thenReturn(true);
+        when(bookModel.isBookAvailable("B002")).thenReturn(false);
+
+        assertTrue(control.checkAvailability("B001"));
+        assertFalse(control.checkAvailability("B002"));
+    }
+
+    @Test
+    @DisplayName("Apabila buku tidak dipinjam (tersedia), fungsi peminjaman dipanggil")
+    void testBorrowBook_WhenAvailable_ShouldCallPeminjaman() {
+        when(bookModel.isBookAvailable("B001")).thenReturn(true);
+        control.borrowBook("B001", "Clean Code", "Afif");
+        verify(bookModel, times(1)).peminjaman("Clean Code", "Afif");
+    }
+
+    @Test
+    @DisplayName("Apabila buku sedang dipinjam (tidak tersedia), fungsi peminjaman TIDAK dipanggil")
+    void testBorrowBook_WhenNotAvailable_ShouldNotCallPeminjaman() {
+        when(bookModel.isBookAvailable("B001")).thenReturn(false);
+        control.borrowBook("B001", "Clean Code", "Afif");
+        verify(bookModel, never()).peminjaman(anyString(), anyString());
+    }
+
+    @Test
+    @DisplayName("Verifikasi urutan eksekusi: getAllBooks -> peminjaman -> sendNotification")
+    void testBorrowBook_ExecutionOrder() {
+        when(bookModel.isBookAvailable("B001")).thenReturn(true);
+        control.borrowBook("B001", "Clean Code", "Afif");
+        InOrder inOrder = Mockito.inOrder(bookModel, notificationService);
+        inOrder.verify(bookModel).getAllBooks();
+        inOrder.verify(bookModel).peminjaman("Clean Code", "Afif");
+        inOrder.verify(notificationService).sendNotification("Afif", "Clean Code");
+    }
+}
+\end{lstlisting}
+
+Kode diatas adalah kode testing utama yang menggunakan Mockito. Terdapat @BeforeEach yang digunakan untuk menginisialisasi objek-objek yang akan digunakan dalam testing. Kemudian terdapat beberapa test yang akan dibahas satu persatu.
+
+\begin{enumerate}
+    \item testCheckAvailability: Test ini digunakan untuk mengecek apakah fungsi checkAvailability mengembalikan nilai yang sesuai dengan yang diharapkan. Pada test ini, mahasiswa menggunakan when untuk menentukan nilai yang akan dikembalikan oleh method isBookAvailable pada bookModel. Kemudian mahasiswa menggunakan assertTrue dan assertFalse untuk memverifikasi hasil dari fungsi checkAvailability.\label{two}
+    \item testBorrowBook\_WhenAvailable\_ShouldCallPeminjaman\: Test ini digunakan untuk mengecek apakah fungsi peminjaman dipanggil ketika buku tersedia. Pada test ini, mahasiswa menggunakan when untuk menentukan bahwa buku dengan id "B001" tersedia. Kemudian mahasiswa memanggil fungsi borrowBook dan menggunakan verify untuk memastikan bahwa fungsi peminjaman dipanggil dengan parameter yang sesuai.\label{three}
+    \item testBorrowBook\_WhenNotAvailable\_ShouldNotCallPeminjaman\: Test ini digunakan untuk mengecek apakah fungsi peminjaman tidak dipanggil ketika buku tidak tersedia. Pada test ini, mahasiswa menggunakan when untuk menentukan bahwa buku dengan id "B001" tidak tersedia. Kemudian mahasiswa memanggil fungsi borrowBook dan menggunakan verify untuk memastikan bahwa fungsi peminjaman tidak dipanggil.\label{four}
+    \item testBorrowBook\_ExecutionOrder\: Test ini digunakan untuk memverifikasi urutan eksekusi fungsi-fungsi yang dipanggil dalam fungsi borrowBook. Pada test ini, mahasiswa menggunakan InOrder untuk memverifikasi urutan eksekusi fungsi-fungsi yang dipanggil. mahasiswa memastikan bahwa fungsi getAllBooks dipanggil terlebih dahulu, kemudian fungsi peminjaman, dan terakhir fungsi sendNotification.\label{six}
+\end{enumerate}
+
+\subsection{Soal}
+Implementasikan mockito, identifikasi stub dan mock yang bisa digunakan dalam kasus berikut. Silahkan menambahkan fungsi atau class yang dibutuhkan.
+\begin{enumerate}
+\item Tambahkan fungsi untuk cek ketersediaan buku pada controller dan model.. Cek ketersediaan buku berdasarkan id. Buatlah test method untuk method cek ketersediaan pada controller. Terjawab pada \ref{one} dan \ref{two}.
+\item Meminjam buku (id buku). Buat 2 test scenario:
+\begin{enumerate}
+    \item Apabila tidak sedang dipinjam maka fungsi peminjaman buku akan dipanggil. Terjawab pada \ref{three}.
+    \item Apabila buku sedang dipinjam, lakukan verifikasi bahwa fungsi peminjaman buku tidak dipanggil. Terjawab pada \ref{four}.
+\end{enumerate}
+\item Tambahkan class model notificationService yang akan mengirimkan notifikasi apabila buku berhasil dipinjam atau dikembalikan. Urutan proses yang diharapkan (eksplor penggunaan fungsi InOrder untuk memastikan urutan pemanggilannya sesuai):
+\begin{enumerate}
+    \item getAllBooks()
+    \item Peminjaman(title, username)
+    \item sendNotification(username, title)
+\end{enumerate}
+Terjawab pada \ref{five} dan \ref{six}.
+\end{enumerate}
+
+\subsection{Gambar Hasil Run}
+Berikut adalah gambar hasil run dari kode diatas:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{one.png}
+    \caption{Hasil Run}
+    \label{fig:hasil_run}
+\end{figure}
+
+Warning yang terdapat pada gambar tersebut tidak mempengaruhi hasil run. Error tersebut muncul karena mockito melakukan injeksi kode selama proses mocking, sehingga kode yang dihasilkan tidak dapat dikenali oleh IDE. Namun, semua test berhasil dijalankan dengan hasil yang sesuai dengan yang diharapkan.
+
+\subsection{GitHub}
+Berikut adalah link repository di GitHub yang berisi kode diatas \url{https://github.com/bukunya/PPPL/tree/Pertemuan4}
+
+\section{Kesimpulan}
+Berdasarkan praktikum yang telah dilaksanakan, dapat ditarik beberapa kesimpulan sebagai berikut:
+\begin{enumerate}
+    \item Framework Mockito terbukti sangat efektif dalam melakukan pengujian unit (unit testing) dengan mengisolasi kelas yang diuji (LibraryControl) dari antarmuka dependensinya (LibraryModel dan NotificationService). Hal ini membuat pengujian menjadi lebih fokus pada logika bisnis tanpa bergantung pada implementasi infrastruktur asli.
+    \item Penggunaan teknik stubbing melalui metode when(...).thenReturn(...) memungkinkan penguji untuk merekayasa skenario pengujian dengan mudah, seperti menyimulasikan kondisi di mana buku tersedia atau tidak tersedia, tanpa memerlukan modifikasi pada basis data nyata.
+    \item Verifikasi interaksi (behavior verification) berhasil diimplementasikan menggunakan fungsi verify(). Fungsi ini memastikan bahwa metode tertentu dipanggil sesuai skenario, baik dipanggil tepat satu kali maupun tidak dipanggil sama sekali (never()).
+    \item Fitur InOrder pada Mockito terbukti sangat handal untuk memastikan kebenaran alur program secara ketat dengan memvalidasi urutan eksekusi pemanggilan metode. Pada kasus ini, urutan proses sistem yaitu getAllBooks() $\rightarrow$ peminjaman() $\rightarrow$ sendNotification() berhasil diverifikasi dengan tepat.
+\end{enumerate}
+
+\section{Daftar Pustaka}
+\begin{enumerate}[label={[\arabic*]}]
+    \item Maven - Mockito mock objects library core API and implementation  \url{https://mvnrepository.com/artifact/org.mockito/mockito-core/5.20.0}
+    \item GeeksforGeeks - Introduction to Mockito \url{https://www.geeksforgeeks.org/java/introduction-to-mockito/}
+\end{enumerate}
+
+\end{document}
