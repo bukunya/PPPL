@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="9de06aa9-7ab2-4f81-bb98-c4267c30704f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Pertemuan4/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Pertemuan4/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Pertemuan4/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Pertemuan4/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Pertemuan4/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Pertemuan4/src/main/java/org/example/Book.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Pertemuan4/src/main/java/org/example/LibraryControl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Pertemuan4/src/main/java/org/example/LibraryModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Pertemuan4/src/main/java/org/example/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Pertemuan4/src/main/java/org/example/NotificationService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Pertemuan4/src/test/java/org/example/LibraryControlTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pt8/pt8_B2_Abdullah_537611.aux" beforeDir="false" afterPath="$PROJECT_DIR$/../pt8/pt8_B2_Abdullah_537611.aux" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pt8/pt8_B2_Abdullah_537611.fdb_latexmk" beforeDir="false" afterPath="$PROJECT_DIR$/../pt8/pt8_B2_Abdullah_537611.fdb_latexmk" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pt8/pt8_B2_Abdullah_537611.fls" beforeDir="false" afterPath="$PROJECT_DIR$/../pt8/pt8_B2_Abdullah_537611.fls" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pt8/pt8_B2_Abdullah_537611.log" beforeDir="false" afterPath="$PROJECT_DIR$/../pt8/pt8_B2_Abdullah_537611.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pt8/pt8_B2_Abdullah_537611.out" beforeDir="false" afterPath="$PROJECT_DIR$/../pt8/pt8_B2_Abdullah_537611.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pt8/pt8_B2_Abdullah_537611.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/../pt8/pt8_B2_Abdullah_537611.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pt8/pt8_B2_Abdullah_537611.synctex.gz" beforeDir="false" afterPath="$PROJECT_DIR$/../pt8/pt8_B2_Abdullah_537611.synctex.gz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pt8/pt8_B2_Abdullah_537611.tex" beforeDir="false" afterPath="$PROJECT_DIR$/../pt8/pt8_B2_Abdullah_537611.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wallet" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 0
+}]]></component>
+  <component name="ProjectId" id="3DZx5a81LHF3tCOhut0l82owP7B" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "JUnit.MainTest.executor": "Run",
+    "JUnit.MainTest.testCase1_NoSuchElement.executor": "Run",
+    "JUnit.MainTest.testCase1_NoSuchElementFix.executor": "Run",
+    "JUnit.MainTest.testCase4_StaleElementFix.executor": "Run",
+    "JUnit.MainTest.testDragAndDrop.executor": "Run",
+    "JUnit.MainTest.testDragAndDropByOffset.executor": "Run",
+    "JUnit.MainTest.testDragAndDropCondensedJS.executor": "Run",
+    "JUnit.MainTest.testDragAndDropStudentWay.executor": "Run",
+    "JUnit.MainTest.testHover.executor": "Run",
+    "JUnit.MainTest.testKeyPresses.executor": "Run",
+    "JUnit.Tugas1Test.executor": "Run",
+    "JUnit.Tugas2Test.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "Pertemuan8",
+    "kotlin-language-version-configured": "true"
+  }
+}]]></component>
+  <component name="RunManager" selected="JUnit.Tugas2Test">
+    <configuration name="MainTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Pertemuan9" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.example" />
+      <option name="MAIN_CLASS_NAME" value="org.example.MainTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MainTest.testCase1_NoSuchElementFix" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Pertemuan9" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.example" />
+      <option name="MAIN_CLASS_NAME" value="org.example.MainTest" />
+      <option name="METHOD_NAME" value="testCase1_NoSuchElementFix" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MainTest.testCase4_StaleElementFix" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Pertemuan9" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.example" />
+      <option name="MAIN_CLASS_NAME" value="org.example.MainTest" />
+      <option name="METHOD_NAME" value="testCase4_StaleElementFix" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Tugas1Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Pertemuan9" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.example" />
+      <option name="MAIN_CLASS_NAME" value="org.example.Tugas1Test" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Tugas2Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Pertemuan9" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.example" />
+      <option name="MAIN_CLASS_NAME" value="org.example.Tugas2Test" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.Tugas2Test" />
+        <item itemvalue="JUnit.Tugas1Test" />
+        <item itemvalue="JUnit.MainTest.testCase1_NoSuchElementFix" />
+        <item itemvalue="JUnit.MainTest.testCase4_StaleElementFix" />
+        <item itemvalue="JUnit.MainTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.30387.90" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9de06aa9-7ab2-4f81-bb98-c4267c30704f" name="Changes" comment="" />
+      <created>1778503212806</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1778503212806</updated>
+    </task>
+    <servers />
+  </component>
+</project>
