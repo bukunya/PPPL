@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="9de06aa9-7ab2-4f81-bb98-c4267c30704f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../Pertemuan9/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../pertemuan11/pertemuan11/src/main/java/pages/basePage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../pertemuan11/pertemuan11/src/main/java/pages/resultPage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../pertemuan11/pertemuan11/src/main/java/pages/searchPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Pertemuan4/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Pertemuan4/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Pertemuan4/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Pertemuan4/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Pertemuan4/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Pertemuan4/src/main/java/org/example/Book.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Pertemuan4/src/main/java/org/example/LibraryControl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Pertemuan4/src/main/java/org/example/LibraryModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Pertemuan4/src/main/java/org/example/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Pertemuan4/src/main/java/org/example/NotificationService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Pertemuan4/src/test/java/org/example/LibraryControlTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Pertemuan9/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Pertemuan9/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pt8/pt8_B2_Abdullah_537611.aux" beforeDir="false" afterPath="$PROJECT_DIR$/../pt8/pt8_B2_Abdullah_537611.aux" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pt8/pt8_B2_Abdullah_537611.fdb_latexmk" beforeDir="false" afterPath="$PROJECT_DIR$/../pt8/pt8_B2_Abdullah_537611.fdb_latexmk" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pt8/pt8_B2_Abdullah_537611.fls" beforeDir="false" afterPath="$PROJECT_DIR$/../pt8/pt8_B2_Abdullah_537611.fls" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pt8/pt8_B2_Abdullah_537611.log" beforeDir="false" afterPath="$PROJECT_DIR$/../pt8/pt8_B2_Abdullah_537611.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pt8/pt8_B2_Abdullah_537611.out" beforeDir="false" afterPath="$PROJECT_DIR$/../pt8/pt8_B2_Abdullah_537611.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pt8/pt8_B2_Abdullah_537611.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/../pt8/pt8_B2_Abdullah_537611.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pt8/pt8_B2_Abdullah_537611.synctex.gz" beforeDir="false" afterPath="$PROJECT_DIR$/../pt8/pt8_B2_Abdullah_537611.synctex.gz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pt8/pt8_B2_Abdullah_537611.tex" beforeDir="false" afterPath="$PROJECT_DIR$/../pt8/pt8_B2_Abdullah_537611.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wallet" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="3DZx5a81LHF3tCOhut0l82owP7B" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;JUnit.MainTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MainTest.lockedOutuser.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MainTest.testCase1_NoSuchElement.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MainTest.testCase1_NoSuchElementFix.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MainTest.testCase4_StaleElementFix.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MainTest.testDragAndDrop.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MainTest.testDragAndDropByOffset.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MainTest.testDragAndDropCondensedJS.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MainTest.testDragAndDropStudentWay.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MainTest.testHover.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MainTest.testKeyPresses.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MainTest.validTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestPage.executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.TestPage.validTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.Tugas1Test.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.Tugas2Test.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Pertemuan10&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/afif/Documents/kuliah/sem4/pppl/Pertemuan8&quot;
+  }
+}</component>
+  <component name="RunManager" selected="JUnit.TestPage">
+    <configuration name="TestPage" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Pertemuan10" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.example" />
+      <option name="MAIN_CLASS_NAME" value="org.example.TestPage" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestPage.lockedOutuser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Pertemuan10" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.example" />
+      <option name="MAIN_CLASS_NAME" value="org.example.TestPage" />
+      <option name="METHOD_NAME" value="lockedOutuser" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestPage.validTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Pertemuan10" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.example" />
+      <option name="MAIN_CLASS_NAME" value="org.example.TestPage" />
+      <option name="METHOD_NAME" value="validTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Tugas1Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Pertemuan10" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.example" />
+      <option name="MAIN_CLASS_NAME" value="org.example.Tugas1Test" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Tugas2Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Pertemuan10" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.example" />
+      <option name="MAIN_CLASS_NAME" value="org.example.Tugas2Test" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.TestPage" />
+        <item itemvalue="JUnit.TestPage.validTest" />
+        <item itemvalue="JUnit.TestPage.lockedOutuser" />
+        <item itemvalue="JUnit.Tugas2Test" />
+        <item itemvalue="JUnit.Tugas1Test" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.30387.90" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9de06aa9-7ab2-4f81-bb98-c4267c30704f" name="Changes" comment="" />
+      <created>1778503212806</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1778503212806</updated>
+    </task>
+    <servers />
+  </component>
+</project>
